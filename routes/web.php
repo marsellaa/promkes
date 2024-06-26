@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AkunController;
+use App\Http\Controllers\PehController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mitra/{mitra}/edit', 'mitraController@edit')->name('mitra.edit');
     Route::put('/mitra/{mitra}', 'mitraController@update')->name('mitra.update');
     Route::delete('/mitra/{mitra}', 'mitraController@destroy')->name('mitra.destroy');
-    
+
 
     // Halaman Partisipan
     Route::get('/partisipan', 'partisipanController@index')->name('partisipan.index');
@@ -129,4 +131,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/flyer/{flyer}/edit', 'FlyerController@edit')->name('flyer.edit');
     Route::put('/flyer/{flyer}', 'FlyerController@update')->name('flyer.update');
     Route::delete('/flyer/{flyer}', 'FlyerController@destroy')->name('flyer.destroy');
+
+    Route::get('akun',[AkunController::class,'index'])->name('akun.index');
+    Route::get('akun/create',[AkunController::class,'create'])->name('akun.create');
+    Route::post('akun/store',[AkunController::class,'store'])->name('akun.store');
+    Route::get('akun/edit/{id}',[AkunController::class,'edit'])->name('akun.edit');
+    Route::put('akun/update/{id}',[AkunController::class,'update'])->name('akun.update');
+    Route::delete('akun/destroy/{id]',[AkunController::class,'destroy'])->name('akun.destroy');
 });

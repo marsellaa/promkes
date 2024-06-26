@@ -29,7 +29,9 @@
                     <th>Status</th>
                     <th>No. Telp PIC</th>
                     <th>Dokumentasi</th>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <th>Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +52,7 @@
                             Tidak ada dokumentasi
                         @endif
                     </td>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <td>
                         <a href="{{ route('kerjasama_nonbpjs.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('kerjasama_nonbpjs.destroy', $item->id) }}" method="POST" style="display:inline;">
@@ -58,6 +61,7 @@
                             <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
                         </form>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -86,7 +90,7 @@
                     form.submit();
                 });
             });
-                
+
             });
 
     </script>

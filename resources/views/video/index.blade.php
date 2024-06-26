@@ -29,7 +29,9 @@
                     <th>Unit Kerja</th>
                     <th>Tim Promkes</th>
                     <th>Dokumentasi</th>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <th>Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -50,16 +52,18 @@
                             Tidak ada dokumentasi
                         @endif
                     </td>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <td>
                         @if(Auth::user()->id === $video->id_user || Auth::user()->id_role === 1)
-                            <a href="{{ route('video.edit', $video->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $video->tema }}">Hapus</button>
-                            </form>
+                        <a href="{{ route('video.edit', $video->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $video->tema }}">Hapus</button>
+                        </form>
                         @endif
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -87,7 +91,7 @@
                     form.submit();
                 });
             });
-                
+
             });
 
     </script>

@@ -36,7 +36,8 @@
     <div class="header">
         <!-- <img src="{{ public_path('img/logo.png') }}" alt="Logo"> Sesuaikan path logo sesuai kebutuhan -->
         <h1>Talkshow Interaktif PEH "PEH EDUKASI HOESIN'ERS"</h1>
-        <h2>Rumah Sakit Mohammad Hoesin Palembang 2024</h2>
+        <h2>Rumah Sakit Mohammad Hoesin Palembang</h2>
+        <h3>Periode Waktu {{$start_date}} - {{$end_date}}</h3>
     </div>
     <table>
         <thead>

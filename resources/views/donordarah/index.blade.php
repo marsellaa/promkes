@@ -21,7 +21,9 @@
                     <th>Mitra</th>
                     <th>Partisipan</th>
                     <th>Dokumentasi</th>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <th>Edit | Delete</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -44,16 +46,18 @@
                             <a href="{{ Storage::url('public/dokumentasi/' . $item->dokumentasi) }}" target="_blank">Lihat Dokumentasi</a>
                         @endif
                     </td>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <td>
                         @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
-                            <a href="{{ route('donordarah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('donordarah.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
-                            </form>
+                        <a href="{{ route('donordarah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('donordarah.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
+                        </form>
                         @endif
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -82,7 +86,7 @@
                     form.submit();
                 });
             });
-                
+
             });
 
     </script>

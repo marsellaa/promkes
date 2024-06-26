@@ -29,13 +29,13 @@ class PehController extends Controller
         if ($user->id_role !== 1) {
             return('peh.index');
         }
-        
+
         $dokter = Dokter::all();
         $user = User::all();
         return view('peh.create', compact('dokter', 'user'));
     }
 
-    
+
 
     public function store(Request $request)
     {
@@ -64,7 +64,7 @@ class PehController extends Controller
         $user = Auth::user();
         if ($user->id_role !== 1) {
             return back();
-        
+
         }
 
 
@@ -101,18 +101,21 @@ class PehController extends Controller
         if ($user->id_role !== 1) {
             return back();
         }
-        
+
         $peh = Peh::findOrFail($id);
         $peh->delete();
 
         return redirect()->route('peh.index')->with('success', 'Data berhasil dihapus.');
     }
 
-    public function downloadPdf()
+    public function downloadPdf(Request $request)
     {
-        $peh = Peh::with(['dokter', 'user'])->get();
+        $start_date = $request->get('start_date', date('Y-m-d'));
+        $end_date = $request->get('end_date', date('Y-m-d'));
 
-        $pdf = FacadePdf::loadView('peh.pdf', compact('peh'))->setPaper('a4', 'landscape');
+        $peh = Peh::with(['dokter', 'user'])->whereBetween('tgl',[$start_date,$end_date])->get();
+        $pdf = FacadePdf::loadView('peh.pdf', compact('peh','start_date','end_date'))->setPaper('a4', 'landscape');
         return $pdf-> download('peh-data.pdf');
     }
+
 }

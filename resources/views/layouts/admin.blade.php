@@ -28,7 +28,7 @@
     <!-- Select2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 
-    
+
 
 </head>
 
@@ -159,6 +159,23 @@
         <hr class="sidebar-divider">
 
         <!-- Heading -->
+    @if (Auth::user()->id_role === 1 || Auth::user()->id_role === 4)
+        <div class="sidebar-heading">
+            {{ __('Kelola Akun') }}
+        </div>
+
+        <!-- Nav Item - Profile -->
+        <li class="nav-item {{ Nav::isRoute('akun.index') }}">
+            <a class="nav-link" href="{{ route('akun.index') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>{{ __('Akun') }}</span>
+            </a>
+        </li>
+    @endif
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
         <div class="sidebar-heading">
             {{ __('Settings') }}
         </div>
@@ -220,7 +237,7 @@
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ __('Profile') }}
                             </a>
-                            
+
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

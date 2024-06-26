@@ -2,21 +2,38 @@
 
 @section('main-content')
     <!-- Page Heading -->
-    <div class="d-flex align-items-center mb-4 justify-content-between">
+    <div class="d-flex align-items-center justify-content-between">
         <div>
             <h1 class="h3 text-gray-800">PEH EDUKASI HOESIN'ERS</h1>
             <p class="mb-4">Tabel Kegiatan PEH</p>
         </div>
-        @if (Auth::user()->id_role === 1)
-            <div>
-                <a href="{{ route('peh.create') }}" class="btn btn-primary mb-4">Tambah</a>
-                <a href="{{ route('peh.downloadPdf') }}" class="btn btn-secondary mb-4">
+        @if (Auth::user()->id_role === 1 || Auth::user()->id_role === 4)
+            <div class="d-flex">
+
+                <form id="cetakForm">
+                    <input type="date" name="start_date"
+                        value="{{ request()->get('start_date', date('Y-m-d')) }}" class="form-control"
+                        style="width: 200px;">
+                    <div class="mx-3">-</div>
+                    <input type="date" name="end_date"
+                        value="{{ request()->get('end_date', date('Y-m-d')) }}" class="form-control"
+                        style="width: 200px;">
+                    <button id="cetakpeh" type="submit" class="btn btn-success mb-4">
+                        <i class="fa fa-print"></i> Cetak</button>
+                </form>
+                {{-- <a href="{{ route('peh.downloadPdf') }}" class="btn btn-secondary mb-4">
                     <i class="fas fa-download"></i> Download PDF
-                </a>
+                </a> --}}
             </div>
         @endif
     </div>
 
+    <div style="float: right">
+        @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+            <a href="{{ route('peh.create') }}" class="btn btn-primary mb-4">Tambah</a>
+        @endif
+
+    </div>
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -28,7 +45,9 @@
                     <th>Tema</th>
                     <th>Status</th>
                     <th>Host</th>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <th>Edit | Delete</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -79,7 +98,7 @@
                     form.submit();
                 });
             });
-                
+
             });
 
     </script>
@@ -93,4 +112,21 @@
             });
         </script>
     @endif
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('cetakForm');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const startDate = document.querySelector('input[name="start_date"]').value;
+                const endDate = document.querySelector('input[name="end_date"]').value;
+
+                const pdfUrl = '{{ route('peh.downloadPdf') }}' + `?start_date=${startDate}&end_date=${endDate}`;
+
+                window.location.href = pdfUrl;
+            });
+        });
+    </script>
 @endpush

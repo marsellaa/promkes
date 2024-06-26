@@ -29,7 +29,9 @@
                     <th>Akun Tiktok</th>
                     <th>Masukan/Saran</th>
                     <th>Jawaban</th>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <th>Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +50,7 @@
                             <b>{{ $jawaban->pertanyaan->pertanyaan }}:</b> {{ $jawaban->jawaban }}<br>
                         @endforeach
                     </td>
+                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
                     <td>
                         <a href="{{ route('feedback.edit', $feedback->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" style="display:inline;">
@@ -56,6 +59,7 @@
                             <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $feedback->nama_pasien }}">Hapus</button>
                         </form>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -84,7 +88,7 @@
                     form.submit();
                 });
             });
-                
+
             });
 
     </script>
