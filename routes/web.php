@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
         return view('about');
     })->name('about');
 
-    Route::middleware('IsAdmin')->group(function () {
+    Route::middleware('isAdmin')->group(function () {
         
         // Halaman PEH
         Route::get('/peh', 'PehController@index')->name('peh.index');

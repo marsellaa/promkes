@@ -46,7 +46,7 @@
                             <a href="{{ Storage::url('public/dokumentasi/' . $item->dokumentasi) }}" target="_blank">Lihat Dokumentasi</a>
                         @endif
                     </td>
-                    @if(!Auth::user()->id_role == 1 ||Auth::user()->id_role == 2 )
+                    @if(Auth::user()->id_role == 1 || Auth::user()->id_role == 2 )
                     <td>
                         @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
                         <a href="{{ route('donordarah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
