@@ -22,10 +22,6 @@ class DonorDarahController extends Controller
 
     public function create()
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
 
         $mitras = Mitra::all();
         $partisipans = Partisipan::all();
@@ -35,10 +31,7 @@ class DonorDarahController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $request->validate([
             'tgl' => 'required|date',
@@ -71,10 +64,7 @@ class DonorDarahController extends Controller
 
     public function edit(DonorDarah $donordarah)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $mitras = Mitra::all();
         $partisipans = Partisipan::all();
@@ -84,10 +74,7 @@ class DonorDarahController extends Controller
 
     public function update(Request $request, DonorDarah $donordarah)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $request->validate([
             'tgl' => 'required|date',
@@ -124,10 +111,7 @@ class DonorDarahController extends Controller
 
     public function destroy(DonorDarah $donordarah)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         if ($donordarah->dokumentasi && Storage::exists('public/dokumentasi/' . $donordarah->dokumentasi)) {
             Storage::delete('public/dokumentasi/' . $donordarah->dokumentasi);

@@ -29,7 +29,7 @@
     </div>
 
     <div style="float: right">
-        @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+        @if(!Auth::user()->id_role == 1 ||Auth::user()->id_role == 2 )
             <a href="{{ route('peh.create') }}" class="btn btn-primary mb-4">Tambah</a>
         @endif
 
@@ -45,7 +45,7 @@
                     <th>Tema</th>
                     <th>Status</th>
                     <th>Host</th>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+                    @if(!Auth::user()->id_role == 1 ||Auth::user()->id_role == 2 )
                     <th>Edit | Delete</th>
                     @endif
                 </tr>

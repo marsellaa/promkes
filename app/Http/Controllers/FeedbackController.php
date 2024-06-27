@@ -20,8 +20,6 @@ class FeedbackController extends Controller
     {
         $user = Auth::user();
 
-    
-
         $feedbacks = Feedback::with('jawaban.pertanyaan', 'user')->get();
         return view('feedback.index', compact('feedbacks'));
     }
@@ -30,10 +28,6 @@ class FeedbackController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
         $pertanyaans = Pertanyaan::all();
         $users = User::all();
         return view('feedback.create', compact('pertanyaans', 'users'));
@@ -41,12 +35,7 @@ class FeedbackController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl' => 'required|date',
             'nama_pasien' => 'required|string|max:255',

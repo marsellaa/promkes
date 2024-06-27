@@ -13,7 +13,7 @@ class AkunController extends Controller
      */
     public function index()
     {
-        $akun = User::whereBetween('id_role',[1,3])->get();
+        $akun = User::whereBetween('id_role',[1,2])->get();
         return view('users.index',[
             'akun'=>$akun
         ]);
