@@ -74,7 +74,6 @@ class DonorDarahController extends Controller
 
     public function update(Request $request, DonorDarah $donordarah)
     {
-        
 
         $request->validate([
             'tgl' => 'required|date',

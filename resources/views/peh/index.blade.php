@@ -7,9 +7,8 @@
             <h1 class="h3 text-gray-800">PEH EDUKASI HOESIN'ERS</h1>
             <p class="mb-4">Tabel Kegiatan PEH</p>
         </div>
-        @if (Auth::user()->id_role === 1 || Auth::user()->id_role === 4)
+        @if (Auth::user()->id_role === 1)
             <div class="d-flex">
-
                 <form id="cetakForm">
                     <input type="date" name="start_date"
                         value="{{ request()->get('start_date', date('Y-m-d')) }}" class="form-control"
@@ -21,19 +20,16 @@
                     <button id="cetakpeh" type="submit" class="btn btn-success mb-4">
                         <i class="fa fa-print"></i> Cetak</button>
                 </form>
-                {{-- <a href="{{ route('peh.downloadPdf') }}" class="btn btn-secondary mb-4">
-                    <i class="fas fa-download"></i> Download PDF
-                </a> --}}
             </div>
         @endif
     </div>
 
-    <div style="float: right">
-        @if(!Auth::user()->id_role == 1 ||Auth::user()->id_role == 2 )
+    @if (Auth::user()->id_role === 1)
+        <div style="float: right">
             <a href="{{ route('peh.create') }}" class="btn btn-primary mb-4">Tambah</a>
-        @endif
+        </div>
+    @endif
 
-    </div>
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -45,8 +41,8 @@
                     <th>Tema</th>
                     <th>Status</th>
                     <th>Host</th>
-                    @if(!Auth::user()->id_role == 1 ||Auth::user()->id_role == 2 )
-                    <th>Edit | Delete</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Edit | Delete</th>
                     @endif
                 </tr>
             </thead>
@@ -60,6 +56,7 @@
                     <td>{{ $item->tema }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->user->name }}</td>
+                    @if(Auth::user()->id_role === 1)
                     <td>
                         @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
                             <a href="{{ route('peh.edit', $item->id) }}" class="btn btn-warning">Edit</a>
@@ -70,6 +67,7 @@
                             </form>
                         @endif
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
