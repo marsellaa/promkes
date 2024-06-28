@@ -37,7 +37,11 @@
                         <div class="col-lg-12">
                             <div class="text-center">
                                 <h5 class="font-weight-bold">{{  Auth::user()->fullName }}</h5>
-                                <p>Administrator</p>
+                                @if (Auth::user()->id_role == 1)
+                                        Admin
+                                    @else
+                                        User
+                                    @endif
                             </div>
                         </div>
                     </div>
