@@ -72,7 +72,7 @@
             <div class="form-group">
                 <label for="phone_number" class="col-sm-3 col-form-label">No. Telepon</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control" name="phone_number" >
+                    <input type="text" class="form-control" name="phone_number" >
                 </div>
             </div>
         <div class="px-3">

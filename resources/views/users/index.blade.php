@@ -7,7 +7,7 @@
             <h1 class="h3 text-gray-800">Kelola Akun Pengguna</h1>
             <p class="mb-4">Tabel Daftar Akun</p>
         </div>
-        @if (Auth::user()->id_role === 1 || Auth::user()->id_role === 4)
+        @if (Auth::user()->id_role === 1)
             <div>
                 <a href="{{ route('akun.create') }}" class="btn btn-primary mb-4">Tambah Akun</a>
             </div>
@@ -23,48 +23,30 @@
                     <th>Email</th>
                     <th>Role</th>
                     <th>Nomor Telephone</th>
-                    <th colspan="2">Edit | Delete</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Edit | Delete</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach ($akun as $item)
-                @if (Auth::user()->id_role === 1 && $item->id_role >=2)
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->email}}</td>
                     <td>{{$item->role->nama}}</td>
                     <td>{{$item->phone_number}}</td>
+                    @if(Auth::user()->id_role === 1)
                     <td>
-                        @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1 ||Auth::user()->id_role === 4)
-                            <a href="{{ route('akun.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('akun.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('delete')
-                                    <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->name }}">Hapus</button>
-                            </form>
-                            @endif
+                        <a href="{{ route('akun.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('akun.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->name }}">Hapus</button>
+                        </form>
                     </td>
+                    @endif
                 </tr>
-                @elseif (Auth::user()->id_role === 4)
-                    <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->role->nama}}</td>
-                        <td>{{$item->phone_number}}</td>
-                        <td>
-                            @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1 ||Auth::user()->id_role === 4)
-                                <a href="{{ route('akun.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('akun.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('delete')
-                                        <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->name }}">Hapus</button>
-                                </form>
-                                @endif
-                        </td>
-                    </tr>
-                @endif
                 @endforeach
             </tbody>
         </table>
