@@ -26,8 +26,8 @@
                     <th>Tujuan</th>
                     <th>Host</th>
                     <th>Dokumentasi</th>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
-                    <th>Aksi</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -46,16 +46,14 @@
                             Tidak ada
                         @endif
                     </td>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+                    @if(Auth::user()->id_role === 1)
                     <td>
-                        @if (Auth::user()->id === $kjmitra->id_user || Auth::user()->id_role === 1)
                         <a href="{{ route('kjmitra.edit', $kjmitra->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('kjmitra.destroy', $kjmitra->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $kjmitra->tujuan }}">Hapus</button>
                         </form>
-                        @endif
                     </td>
                     @endif
                 </tr>
@@ -86,8 +84,7 @@
                     form.submit();
                 });
             });
-
-            });
+        });
 
     </script>
     @if(session('success'))

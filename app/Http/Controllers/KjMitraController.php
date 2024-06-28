@@ -21,10 +21,7 @@ class KjMitraController extends Controller
     public function create()
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            return redirect()->route('kjmitra.index');
-        }
-
+        
         $mitras = Mitra::all();
         $users = User::all();
 
@@ -33,11 +30,7 @@ class KjMitraController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl' => 'required|date',
             'id_mitra' => 'required|exists:tb_mitra,id',
@@ -61,9 +54,7 @@ class KjMitraController extends Controller
     public function edit(KjMitra $kjmitra)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            return back();
-        }
+        
 
         $mitras = Mitra::all();
         $users = User::all();
@@ -73,11 +64,7 @@ class KjMitraController extends Controller
 
     public function update(Request $request, KjMitra $kjmitra)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl' => 'required|date',
             'id_mitra' => 'required|exists:tb_mitra,id',
@@ -100,11 +87,7 @@ class KjMitraController extends Controller
 
     public function destroy(KjMitra $kjmitra)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            return back();
-        }
-
+        
         if ($kjmitra->dokumentasi) {
             $filePath = public_path('uploads/kjmitra_dokumentasi/' . $kjmitra->dokumentasi);
             if (file_exists($filePath)) {

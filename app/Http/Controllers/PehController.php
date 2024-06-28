@@ -26,10 +26,7 @@ class PehController extends Controller
     public function create()
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            return('peh.index');
-        }
-
+        
         $dokter = Dokter::all();
         $user = User::all();
         return view('peh.create', compact('dokter', 'user'));
@@ -39,11 +36,8 @@ class PehController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
+        
 
         $validatedData = $request->validate([
             'tgl' => 'required|date',
@@ -62,11 +56,7 @@ class PehController extends Controller
     public function edit(Peh $peh)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            return back();
-
-        }
-
+        
 
         $dokter = Dokter::all();
         $user = User::all();
@@ -76,10 +66,7 @@ class PehController extends Controller
 
     public function update(Request $request, Peh $peh)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $validatedData = $request->validate([
             'tgl' => 'required|date',
@@ -97,10 +84,7 @@ class PehController extends Controller
 
     public function destroy(Peh $peh, $id)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            return back();
-        }
+        
 
         $peh = Peh::findOrFail($id);
         $peh->delete();

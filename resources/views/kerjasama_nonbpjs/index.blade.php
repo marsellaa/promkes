@@ -29,8 +29,8 @@
                     <th>Status</th>
                     <th>No. Telp PIC</th>
                     <th>Dokumentasi</th>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
-                    <th>Aksi</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -52,7 +52,7 @@
                             Tidak ada dokumentasi
                         @endif
                     </td>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+                    @if(Auth::user()->id_role === 1)
                     <td>
                         <a href="{{ route('kerjasama_nonbpjs.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('kerjasama_nonbpjs.destroy', $item->id) }}" method="POST" style="display:inline;">
@@ -91,7 +91,7 @@
                 });
             });
 
-            });
+        });
 
     </script>
     @if(session('success'))

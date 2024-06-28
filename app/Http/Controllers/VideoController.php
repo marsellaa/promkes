@@ -25,10 +25,7 @@ class VideoController extends Controller
     public function create()
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $dokters = Dokter::all();
         $users = User::all();
         return view('video.create', compact('dokters', 'users'));
@@ -36,11 +33,7 @@ class VideoController extends Controller
 
     public function store(Request $request)
     {
-    $user = Auth::user();
-    if ($user->id_role !== 1) {
-        abort(403, 'This action is unauthorized.');
-    }
-
+    
     $request->validate([
         'tgl' => 'required|date',
         'jenis_info' => 'required|string|max:255',
@@ -65,10 +58,7 @@ class VideoController extends Controller
     public function edit(Video $video)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $dokters = Dokter::all();
         $users = User::all();
         return view('video.edit', compact('video', 'dokters', 'users'));
@@ -76,11 +66,7 @@ class VideoController extends Controller
 
     public function update(Request $request, Video $video)
     {
-    $user = Auth::user();
-    if ($user->id_role !== 1) {
-        abort(403, 'This action is unauthorized.');
-    }
-
+    
     $request->validate([
         'tgl' => 'required|date',
         'jenis_info' => 'required|string|max:255',
@@ -108,11 +94,7 @@ class VideoController extends Controller
 
     public function destroy(Video $video)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         if ($video->dokumentasi && Storage::exists('public/videos/' . $video->dokumentasi)) {
             Storage::delete('public/videos/' . $video->dokumentasi);
         }

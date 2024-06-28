@@ -29,8 +29,8 @@
                     <th>Akun Tiktok</th>
                     <th>Masukan/Saran</th>
                     <th>Jawaban</th>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
-                    <th>Aksi</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -50,7 +50,7 @@
                             <b>{{ $jawaban->pertanyaan->pertanyaan }}:</b> {{ $jawaban->jawaban }}<br>
                         @endforeach
                     </td>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+                    @if(Auth::user()->id_role === 1)
                     <td>
                         <a href="{{ route('feedback.edit', $feedback->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" style="display:inline;">

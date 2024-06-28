@@ -23,11 +23,7 @@ class PartisipanController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         return view('partisipan.create');
     }
 
@@ -36,11 +32,7 @@ class PartisipanController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'alamat' => 'nullable|string',
@@ -65,10 +57,7 @@ class PartisipanController extends Controller
     public function edit(Partisipan $partisipan)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+       
         return view('partisipan.edit', compact('partisipan'));
     }
 
@@ -77,11 +66,7 @@ class PartisipanController extends Controller
      */
     public function update(Request $request, Partisipan $partisipan)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'alamat' => 'nullable|string',
@@ -97,11 +82,7 @@ class PartisipanController extends Controller
      */
     public function destroy(Partisipan $partisipan)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $partisipan->delete();
 
         return redirect()->route('partisipan.index')->with('success', 'Data Partisipan berhasil dihapus');

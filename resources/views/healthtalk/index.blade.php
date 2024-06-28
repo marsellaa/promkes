@@ -22,15 +22,15 @@
                 <tr>
                     <th>Tanggal</th>
                     <th>Nama Narasumber</th>
-                    <th>Spesialisai</th>
+                    <th>Spesialisasi</th>
                     <th>Unit Kerja</th>
                     <th>Tema</th>
                     <th>Status</th>
                     <th>Mitra</th>
                     <th>Partisipan</th>
                     <th>Host</th>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
-                    <th>Edit | Delete</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Edit | Delete</th>
                     @endif
                 </tr>
             </thead>
@@ -54,16 +54,14 @@
                         @endforeach
                     </td>
                     <td>{{ $healthtalk->user->name }}</td>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+                    @if(Auth::user()->id_role === 1)
                     <td>
-                        @if (Auth::user()->id === $healthtalk->id_user || Auth::user()->id_role === 1)
                         <a href="{{ route('healthtalk.edit', $healthtalk->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('healthtalk.destroy', $healthtalk->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $healthtalk->tema_ht }}">Hapus</button>
                         </form>
-                        @endif
                     </td>
                     @endif
                 </tr>

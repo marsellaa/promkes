@@ -23,10 +23,6 @@ class MitraController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
 
         return view('mitra.create');
     }
@@ -36,10 +32,7 @@ class MitraController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
@@ -65,9 +58,7 @@ class MitraController extends Controller
     public function edit(Mitra $mitra)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         return view('mitra.edit', compact('mitra'));
     }
@@ -77,11 +68,7 @@ class MitraController extends Controller
      */
     public function update(Request $request, Mitra $mitra)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'alamat' => 'nullable|string',
@@ -97,10 +84,7 @@ class MitraController extends Controller
      */
     public function destroy(Mitra $mitra)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $mitra->delete();
 

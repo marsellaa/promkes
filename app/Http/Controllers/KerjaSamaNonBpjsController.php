@@ -24,6 +24,7 @@ class KerjaSamaNonBpjsController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
         $mitras = Mitra::all();
         $users = User::all();
         return view('kerjasama_nonbpjs.create', compact('mitras', 'users'));
@@ -31,11 +32,7 @@ class KerjaSamaNonBpjsController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl_mulai' => 'required|date',
             'tgl_akhir' => 'required|date',
@@ -73,11 +70,7 @@ class KerjaSamaNonBpjsController extends Controller
 
     public function update(Request $request, KerjaSamaNonBpjs $kerjasama_nonbpjs)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl_mulai' => 'required|date',
             'tgl_akhir' => 'required|date',
@@ -108,11 +101,7 @@ class KerjaSamaNonBpjsController extends Controller
 
     public function destroy(KerjaSamaNonBpjs $kerjasama_nonbpjs)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         if ($kerjasama_nonbpjs->dokumentasi) {
             $file_path = public_path('uploads/kerjasama_nonbpjs_dokumentasi') . '/' . $kerjasama_nonbpjs->dokumentasi;
             if (file_exists($file_path)) {

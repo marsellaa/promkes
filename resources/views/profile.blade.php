@@ -40,7 +40,7 @@
                                 @if (Auth::user()->id_role == 1)
                                         Admin
                                     @else
-                                        User
+                                        Tim Promkes
                                     @endif
                             </div>
                         </div>

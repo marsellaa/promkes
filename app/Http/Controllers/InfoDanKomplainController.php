@@ -21,9 +21,7 @@ class InfoDanKomplainController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $users = User::all();
         return view('infodankomplain.create', compact('users'));
@@ -31,12 +29,7 @@ class InfoDanKomplainController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl' => 'required|date',
             'jenis_berita' => 'required|in:Informasi,Komplain',
@@ -55,9 +48,7 @@ class InfoDanKomplainController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $infoKomplain = InfoDanKomplain::findOrFail($id);
         $users = User::all();
@@ -66,11 +57,7 @@ class InfoDanKomplainController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $validatedData = $request->validate([
             'tgl' => 'required|date',
@@ -89,11 +76,7 @@ class InfoDanKomplainController extends Controller
 
     public function destroy($id)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $infoKomplain = InfoDanKomplain::findOrFail($id);
         $infoKomplain->delete();

@@ -23,11 +23,7 @@ class PertanyaanController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         return view('pertanyaan.create');
     }
 
@@ -36,11 +32,7 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'pertanyaan' => 'required|string',
         ]);
@@ -64,9 +56,7 @@ class PertanyaanController extends Controller
     public function edit(Pertanyaan $pertanyaan)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         return view('pertanyaan.edit', compact('pertanyaan'));
     }
@@ -76,11 +66,7 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request,Pertanyaan $pertanyaan)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'pertanyaan' => 'required|string',
         ]);
@@ -95,11 +81,7 @@ class PertanyaanController extends Controller
      */
     public function destroy(Pertanyaan $pertanyaan)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $pertanyaan->delete();
 
         return redirect()->route('pertanyaan.index')->with('success', 'Data pertanyaan berhasil dihapus');

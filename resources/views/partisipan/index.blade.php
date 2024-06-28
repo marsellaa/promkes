@@ -8,15 +8,14 @@
         <a href="{{ route('partisipan.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
     @endif
 
-
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
-                    <th>Edit | Delete</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Edit | Delete</th>
                     @endif
                 </tr>
             </thead>
@@ -25,16 +24,14 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->nama }}</td>
-                    @if(!Auth::user()->id_role == 3 ||Auth::user()->id_role == 2 )
+                    @if(Auth::user()->id_role === 1)
                     <td>
-                        @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
                         <a href="{{ route('partisipan.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('partisipan.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
                         </form>
-                        @endif
                     </td>
                     @endif
                 </tr>
@@ -65,8 +62,7 @@
                     form.submit();
                 });
             });
-
-            });
+        });
 
     </script>
     @if(session('success'))

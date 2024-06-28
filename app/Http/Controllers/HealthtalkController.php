@@ -31,10 +31,7 @@ class HealthTalkController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $dokters = Dokter::all();
         $users = User::all();
         $mitras = Mitra::all();
@@ -44,11 +41,6 @@ class HealthTalkController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
 
         $request->validate([
             'tgl' => 'required|date',
@@ -79,10 +71,7 @@ class HealthTalkController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $healthtalk = HealthTalk::with(['mitras', 'partisipans'])->findOrFail($id);
         $dokters = Dokter::all();
         $users = User::all();
@@ -93,12 +82,7 @@ class HealthTalkController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $validatedData = $request->validate([
             'tgl' => 'required|date',
             'id_dokter' => 'required|exists:tb_dokter,id',
@@ -121,12 +105,7 @@ class HealthTalkController extends Controller
 
     public function destroy($id)
     {
-        $user = Auth::user();
-
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $healthtalk = HealthTalk::findOrFail($id);
         $healthtalk->mitras()->detach();
         $healthtalk->partisipans()->detach();

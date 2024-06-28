@@ -25,10 +25,7 @@ class FlyerController extends Controller
     public function create()
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
-
+        
         $dokters = Dokter::all();
         $users = User::all();
         return view('flyer.create', compact('dokters', 'users'));
@@ -36,10 +33,7 @@ class FlyerController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $request->validate([
             'tgl' => 'required|date',
@@ -66,9 +60,7 @@ class FlyerController extends Controller
     public function edit(Flyer $flyer)
     {
         $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $dokters = Dokter::all();
         $users = User::all();
@@ -77,10 +69,7 @@ class FlyerController extends Controller
 
     public function update(Request $request, Flyer $flyer)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         $request->validate([
             'tgl' => 'required|date',
@@ -109,10 +98,7 @@ class FlyerController extends Controller
 
     public function destroy(Flyer $flyer)
     {
-        $user = Auth::user();
-        if ($user->id_role !== 1) {
-            abort(403, 'This action is unauthorized.');
-        }
+        
 
         if ($flyer->dokumentasi && Storage::exists('public/flyers/' . $flyer->dokumentasi)) {
             Storage::delete('public/flyers/' . $flyer->dokumentasi);
