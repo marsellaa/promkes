@@ -59,14 +59,14 @@
                 <label for="">Role Akun
                     <select name="id_role" id="id_role" class="form-control">
                         @if(Auth::user()->id_role === 1)
-                        <option value="2" {{ $akun->id_role == 2 ? 'selected' : '' }}>User</option>
-                        <option value="3" {{ $akun->id_role == 3 ? 'selected' : '' }}>Monitoring</option>
+                        <option value="1" {{ $akun->id_role == 2 ? 'selected' : '' }}>Admin</option>
+                        <option value="2" {{ $akun->id_role == 3 ? 'selected' : '' }}>Tim Promkes</option>
                         @endif
-                        @if(Auth::user()->id_role === 4)
+                        <!-- @if(Auth::user()->id_role === 4)
                         <option value="1" {{ $akun->id_role == 1 ? 'selected' : '' }}>Admin</option>
                         <option value="2" {{ $akun->id_role == 2 ? 'selected' : '' }}>User</option>
                         <option value="3" {{ $akun->id_role == 3 ? 'selected' : '' }}>Monitoring</option>
-                        @endif
+                        @endif -->
                     </select>
                 </label>
             </div>

@@ -58,14 +58,14 @@
                 <label for="">Role Akun
                     <select name="id_role" id="id_role" class="form-control">
                         @if(Auth::user()->id_role === 1)
-                        <option value="2">User</option>
-                        <option value="3">Monitoring</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Tim Promkes</option>
                         @endif
-                        @if(Auth::user()->id_role === 4)
+                        <!-- @if(Auth::user()->id_role === 4)
                         <option value="1">Admin</option>
                         <option value="2">User</option>
                         <option value="3">Monitoring</option>
-                        @endif
+                        @endif -->
                     </select>
                 </label>
             </div>
