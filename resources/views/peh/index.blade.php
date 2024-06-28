@@ -2,10 +2,32 @@
 
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">PEH EDUKASI HOESIN'ERS</h1>
-    <p class="mb-4">Tabel Kegiatan PEH</p>
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h1 class="h3 text-gray-800">PEH EDUKASI HOESIN'ERS</h1>
+            <p class="mb-4">Tabel Kegiatan PEH</p>
+        </div>
+        @if (Auth::user()->id_role === 1)
+            <div class="d-flex">
+                <form id="cetakForm">
+                    <input type="date" name="start_date"
+                        value="{{ request()->get('start_date', date('Y-m-d')) }}" class="form-control"
+                        style="width: 200px;">
+                    <div class="mx-3">-</div>
+                    <input type="date" name="end_date"
+                        value="{{ request()->get('end_date', date('Y-m-d')) }}" class="form-control"
+                        style="width: 200px;">
+                    <button id="cetakpeh" type="submit" class="btn btn-success mb-4">
+                        <i class="fa fa-print"></i> Cetak</button>
+                </form>
+            </div>
+        @endif
+    </div>
+
     @if (Auth::user()->id_role === 1)
-        <a href="{{ route('peh.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+        <div style="float: right">
+            <a href="{{ route('peh.create') }}" class="btn btn-primary mb-4">Tambah</a>
+        </div>
     @endif
 
     <div class="table-responsive">
@@ -36,12 +58,14 @@
                     <td>{{ $item->user->name }}</td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('peh.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('peh.destroy', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->tema }}">Hapus</button>
-                        </form>
+                        @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
+                            <a href="{{ route('peh.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('peh.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->tema }}">Hapus</button>
+                            </form>
+                        @endif
                     </td>
                     @endif
                 </tr>
