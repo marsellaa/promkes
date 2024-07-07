@@ -79,6 +79,14 @@
                                 </div>
                                 
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="phone_number">Phone Number<span class="small text-danger">*</span></label>
+                                        <input type="text" id="phone_number" class="form-control" name="phone_number" placeholder="Enter your phone number" value="{{ old('phone_number', Auth::user()->phone_number) }}">
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-lg-12">
@@ -88,6 +96,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
 
                             <div class="row">
                                 <div class="col-lg-4">

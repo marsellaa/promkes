@@ -40,7 +40,7 @@ class VideoController extends Controller
         'tema' => 'required|string|max:255',
         'id_dokter' => 'required|exists:tb_dokter,id',
         'id_user' => 'required|exists:users,id',
-        'dokumentasi' => 'nullable|file|mimes:mp4,avi,mov|max:10240',
+        'dokumentasi' => 'nullable|file|mimes:mp4,avi,mov|max:1024000',
     ]);
 
     $video = Video::create($request->only(['tgl', 'jenis_info', 'tema', 'id_dokter', 'id_user']));
@@ -73,7 +73,7 @@ class VideoController extends Controller
         'tema' => 'required|string|max:255',
         'id_dokter' => 'required|exists:tb_dokter,id',
         'id_user' => 'required|exists:users,id',
-        'dokumentasi' => 'nullable|file|mimes:mp4,avi,mov|max:10240',
+        'dokumentasi' => 'nullable|file|mimes:mp4,avi,mov|max:1024000',
     ]);
 
     $video->update($request->only(['tgl', 'jenis_info', 'tema', 'id_dokter', 'id_user']));

@@ -24,7 +24,7 @@
                     <th>Role</th>
                     <th>Nomor Telephone</th>
                     @if(Auth::user()->id_role === 1)
-                        <th>Edit | Delete</th>
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -38,11 +38,16 @@
                     <td>{{$item->phone_number}}</td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('akun.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('akun.edit', $item->id) }}"class="btn btn-warning edit-button">
+                            <i class="fa fa-pencil"></i>
+                        </a>
                         <form action="{{ route('akun.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->name }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->name }}">
+                                <i class="fa fa-trash"></i>
+                            </button>
                         </form>
                     </td>
                     @endif

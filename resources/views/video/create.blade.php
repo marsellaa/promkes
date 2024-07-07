@@ -31,13 +31,17 @@
     <form action="{{ route('video.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="tgl">Tanggal</label>
-            <input type="date" class="form-control" id="tgl" name="tgl" required>
+            <label for="tgl">Tanggal
+
+                <input type="date" class="form-control" id="tgl" name="tgl" required>
+            </label>
         </div>
 
         <div class="form-group">
-            <label for="jenis_info">Jenis Informasi</label>
-            <input type="text" class="form-control" id="jenis_info" name="jenis_info" required>
+            <label for="jenis_info">Jenis Informasi
+                </label>
+
+                <input type="text" class="form-control" id="jenis_info" name="jenis_info" required>
         </div>
 
         <div class="form-group">
@@ -47,37 +51,71 @@
 
         <div class="form-group">
             <label for="id_dokter">Narasumber</label>
-            <select class="form-control select2" id="id_dokter" name="id_dokter" onchange="updateFields()" required>
-                <option value="" disabled selected>Pilih Narasumber</option>
-                @foreach ($dokters as $dokter)
+
+                <select class="form-control select2" id="id_dokter" name="id_dokter" onchange="updateFields()" required>
+                    <option value="" disabled selected>Pilih Narasumber</option>
+                    @foreach ($dokters as $dokter)
                     <option value="{{ $dokter->id }}" data-spesialisasi="{{ $dokter->spesialisasi }}" data-subdivisi="{{ $dokter->subdivisi }}">{{ $dokter->nama }}</option>
-                @endforeach
-            </select>
+                    @endforeach
+                </select>
+        </div>
+        <!-- <div class="form-group m-3">
+                <label for="id_dokter" >Nama Narasumber
+                    </label>
+                    <select name="id_dokter" class="form-control select2" id="id_dokter" onchange="updateFields()">
+                        <option value="">Pilih Narasumber</option>
+                        @foreach ($dokters as $dokter)
+                        <option value="{{ $dokter->id }}" 
+                        data-spesialisasi="{{ $dokter->spesialisasi }}" 
+                        data-subdivisi="{{ $dokter->subdivisi }}">
+                        {{ $dokter->nama }}
+                        </option>
+                        @endforeach
+                    </select>
+                 -->
+            
+
+        <div class="form-group">
+            <label for="spesialisasi">Spesialisasi
+
+                <input type="text" class="form-control" id="spesialisasi" readonly>
+            </label>
         </div>
 
         <div class="form-group">
-            <label for="spesialisasi">Spesialisasi</label>
-            <input type="text" class="form-control" id="spesialisasi" readonly>
+            <label for="subdivisi">Unit Kerja
+
+                <input type="text" class="form-control" id="subdivisi" readonly>
+            </label>
         </div>
 
         <div class="form-group">
-            <label for="subdivisi">Unit Kerja</label>
-            <input type="text" class="form-control" id="subdivisi" readonly>
-        </div>
-
-        <div class="form-group">
-            <label for="id_user">Tim Promkes</label>
-            <select class="form-control select2" id="id_user" name="id_user" required>
-                <option value="" disabled selected>Pilih Tim Promkes</option>
-                @foreach ($users as $user)
+            <label for="id_user">Tim Promkes
+                </label>
+                <select class="form-control select2" id="id_user" name="id_user" required>
+                    <option value="" disabled selected>Pilih Tim Promkes</option>
+                    @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endforeach
-            </select>
+                    @endforeach
+                </select>
         </div>
+        <!-- <div class="form-group m-3">
+                <label for="id_user" >Tim Promkes
+                    <select name="id_user" class="form-control select2">
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">
+                                {{ $user->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </label>
+            </div> -->
 
         <div class="form-group">
-            <label for="dokumentasi">Dokumentasi</label>
-            <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi">
+            <label for="dokumentasi">Dokumentasi
+
+                <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi">
+            </label>
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>

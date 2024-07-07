@@ -5,7 +5,9 @@
     <h1 class="h3 mb-2 text-gray-800">Mitra</h1>
     <p class="mb-4">Tabel Data Mitra</p>
     @if (Auth::user()->id_role === 1)
-        <a href="{{ route('mitra.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    <div style="float: right">
+    <a href="{{ route('mitra.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     <div class="table-responsive">
@@ -16,7 +18,7 @@
                     <th>Nama Mitra</th>
                     <th>Alamat</th>
                     @if(Auth::user()->id_role === 1)
-                        <th>Edit | Delete</th>
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -28,11 +30,16 @@
                     <td>{{ $item->alamat }}</td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('mitra.edit', $item->id) }}" class="btn btn-secondary">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('mitra.edit', $item->id) }}"class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('mitra.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->nama }}"><i class="fa fa-trash"></i>
+                                    </button>
+
                         </form>
                     </td>
                     @endif

@@ -17,7 +17,8 @@
                     <input type="date" name="end_date"
                         value="{{ request()->get('end_date', date('Y-m-d')) }}" class="form-control"
                         style="width: 200px;">
-                    <button id="cetakpeh" type="submit" class="btn btn-success mb-4">
+
+                    <button id="cetakpeh" type="submit" class="btn btn-success mb-4 cetak-button">
                         <i class="fa fa-print"></i> Cetak</button>
                 </form>
             </div>
@@ -42,7 +43,7 @@
                     <th>Status</th>
                     <th>Host</th>
                     @if(Auth::user()->id_role === 1)
-                        <th>Edit | Delete</th>
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -59,14 +60,23 @@
                     @if(Auth::user()->id_role === 1)
                     <td>
                         @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
-                            <a href="{{ route('peh.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('peh.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->tema }}">Hapus</button>
-                            </form>
+                            <div class="d-flex">
+                                <a href="{{ route('peh.edit', $item->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="d-inline-block">
+                                <form action="{{ route('peh.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->tema }}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         @endif
                     </td>
+
                     @endif
                 </tr>
                 @endforeach

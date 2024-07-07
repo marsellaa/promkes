@@ -59,8 +59,8 @@
                 <label for="">Role Akun
                     <select name="id_role" id="id_role" class="form-control">
                         @if(Auth::user()->id_role === 1)
-                        <option value="1" {{ $akun->id_role == 2 ? 'selected' : '' }}>Admin</option>
-                        <option value="2" {{ $akun->id_role == 3 ? 'selected' : '' }}>Tim Promkes</option>
+                        <option value="1" {{ $akun->id_role == 1 ? 'selected' : '' }}>Admin</option>
+                        <option value="2" {{ $akun->id_role == 2 ? 'selected' : '' }}>Tim Promkes</option>
                         @endif
                         <!-- @if(Auth::user()->id_role === 4)
                         <option value="1" {{ $akun->id_role == 1 ? 'selected' : '' }}>Admin</option>
@@ -73,7 +73,7 @@
             <div class="form-group">
                 <label for="phone_number" class="col-sm-3 col-form-label">No. Telepon</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control" name="phone_number" value="{{$akun->phone_number}}">
+                    <input type="text" class="form-control" name="phone_number" value="{{$akun->phone_number}}">
                 </div>
             </div>
         <div class="px-3">

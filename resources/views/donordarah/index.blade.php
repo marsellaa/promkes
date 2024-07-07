@@ -5,7 +5,9 @@
     <h1 class="h3 mb-2 text-gray-800">Kegiatan Donor Darah</h1>
     <p class="mb-4">Tabel Data Kegiatan Donor Darah</p>
     @if (Auth::user()->id_role === 1)
+    <div style="float: right">
         <a href="{{ route('donordarah.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     <div class="table-responsive">
@@ -17,12 +19,12 @@
                     <th>Status</th>
                     <th>Jumlah Partisipan</th>
                     <th>Jumlah Donor</th>
-                    <th>Host</th>
+                    <th>Tim Promkes</th>
                     <th>Mitra</th>
                     <th>Partisipan</th>
                     <th>Dokumentasi</th>
-                    @if(!Auth::user()->id_role == 1)
-                    <th>Edit | Delete</th>
+                    @if(Auth::user()->id_role === 1)
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -47,13 +49,18 @@
                         @endif
                     </td>
                     <!-- @if(Auth::user()->id_role == 1 || Auth::user()->id_role == 2 ) -->
-                    <td>
-                        @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
-                        <a href="{{ route('donordarah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                    @if(Auth::user()->id_role === 1)
+                        <td>
+                        <div class="d-flex">
+                            <a href="{{ route('donordarah.edit', $item->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('donordarah.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->nama }}"><i class="fa fa-trash"></i>
+                                    </button>
+
                         </form>
                         @endif
                     </td>

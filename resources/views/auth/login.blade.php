@@ -44,12 +44,12 @@
                                         <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -59,13 +59,13 @@
 
                                 <hr>
 
-                                @if (Route::has('password.request'))
+                                <!-- @if (Route::has('password.request'))
                                     <div class="text-center">
                                         <a class="small" href="{{ route('password.request') }}">
                                             {{ __('Forgot Password?') }}
                                         </a>
                                     </div>
-                                @endif
+                                @endif -->
 
                                 @if (Route::has('register'))
                                     <div class="text-center">

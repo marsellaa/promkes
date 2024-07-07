@@ -24,6 +24,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
+            'phone_number' => 'nullable|numeric|digits_between:1,13',
             'current_password' => 'nullable|required_with:new_password',
             'new_password' => 'nullable|min:8|max:12|required_with:current_password',
             'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
@@ -33,6 +34,7 @@ class ProfileController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
 
         if (!is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {

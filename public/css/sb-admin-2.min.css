@@ -41,7 +41,37 @@
         "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
+        
 }
+
+.edit-button, .delete-button {
+    padding: 10px 12px; /* Menyesuaikan padding agar tombol lebih simetris */
+    margin: 2px; /* Memberikan sedikit jarak antar tombol */
+    border-radius: 5px; /* Membuat sudut tombol lebih membulat dan simetris */
+    font-size: 16px; /* Menyesuaikan ukuran ikon */
+}
+
+.edit-button {
+    background-color: #ffc107; /* Warna latar belakang tombol edit */
+    border-color: #ffc107; /* Warna border tombol edit */
+}
+
+.delete-button {
+    background-color: #dc3545; /* Warna latar belakang tombol hapus */
+    border-color: #dc3545; /* Warna border tombol hapus */
+}
+
+.edit-button i, .delete-button i {
+    margin: 0; /* Menghilangkan margin dari ikon */
+}
+
+
+.cetak-button {
+    margin-left: 10px; /* Memberikan jarak ke kiri */
+    margin-top: 10px;  /* Memberikan jarak ke atas */
+}
+
+
 
 .btn-simple {
     background-color: #6c757d; /* Warna abu-abu yang lebih lembut */

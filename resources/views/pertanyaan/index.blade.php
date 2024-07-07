@@ -5,7 +5,9 @@
     <h1 class="h3 mb-2 text-gray-800">Pertanyaan</h1>
     <p class="mb-4">Tabel Data Pertanyaan</p>
     @if (Auth::user()->id_role === 1)
+    <div style="float: right">
         <a href="{{ route('pertanyaan.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     <div class="table-responsive">
@@ -15,7 +17,7 @@
                     <th>ID</th>
                     <th>Pertanyaan</th>
                     @if(Auth::user()->id_role === 1)
-                        <th>Edit | Delete</th>
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -26,14 +28,19 @@
                     <td>{{ $item->pertanyaan }}</td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('pertanyaan.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('pertanyaan.edit', $item->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('pertanyaan.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->pertanyaan }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->pertanyaan }}"><i class="fa fa-trash"></i>
+                            </button>
                         </form>
                     </td>
                     @endif
+                    
                 </tr>
                 @endforeach
             </tbody>

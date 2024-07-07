@@ -5,7 +5,9 @@
     <h1 class="h3 mb-2 text-gray-800">Informasi dan Komplain</h1>
     <p class="mb-4">Tabel Data Informasi dan Komplain</p>
     @if (Auth::user()->id_role === 1)
+    <div style="float: right">
         <a href="{{ route('infodankomplain.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     @if (session('success'))
@@ -45,11 +47,16 @@
                     <td>{{ $infoKomplain->user->name }}</td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('infodankomplain.edit', $infoKomplain->id) }}" class="btn btn-secondary">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('infodankomplain.edit', $infoKomplain->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('infodankomplain.destroy', $infoKomplain->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $infoKomplain->jenis_berita }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $infoKomplain->jenis_berita }}"><i class="fa fa-trash"></i>
+                                    </button>
+
                         </form>
                     </td>
                     @endif

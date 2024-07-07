@@ -33,13 +33,13 @@
         @method("PUT")
         <div class="px-3">
             <div class="form-group m-3">
-                <label for="tgl">Tanggal</label>
-                <input type="date" class="form-control" id="tgl" name="tgl" value="{{ $peh->tgl }}">
+                <label for="tgl">Tanggal 
+                    <input type="date" class="form-control " id="tgl"  name="tgl" value="{{ $peh->tgl }}">
+                </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group m-3">
                 <label for="id_dokter" class="col-sm-3 col-form-label">Nama Narasumber</label>
-                <div class="col-sm-9">
                     <select name="id_dokter" class="form-control" id="id_dokter" onchange="updateFields()">
                         @foreach ($dokter as $item)
                             <option value="{{ $item->id }}" 
@@ -50,21 +50,21 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
+                
             </div>
 
-            <div class="form-group">
+            <div class="form-group m-3">
                 <label for="spesialisasi" class="col-sm-3 col-form-label">Spesialisasi</label>
-                <div class="col-sm-9">
+                
                     <input type="text" class="form-control" id="spesialisasi" name="spesialisasi" value="{{ $peh->dokter->spesialisasi }}" readonly>
-                </div>
+                
             </div>
 
-            <div class="form-group">
+            <div class="form-group m-3">
                 <label for="subdivisi" class="col-sm-3 col-form-label">Unit Kerja</label>
-                <div class="col-sm-9">
+                
                     <input type="text" class="form-control" id="subdivisi" name="subdivisi" value="{{ $peh->dokter->subdivisi }}" readonly>
-                </div>
+                
             </div>
 
             <div class="form-group m-3">
@@ -82,13 +82,13 @@
                 <select name="status" class="form-control" id="status">
                     <option value="Y" {{ $peh->status == 'Y' ? 'selected' : '' }}>Y (Ya)</option>
                     <option value="T" {{ $peh->status == 'T' ? 'selected' : '' }}>T (Tidak)</option>
-                    <option value="P" {{ $peh->status == 'P' ? 'selected' : '' }}>P (Pending)</option>
+                    <option value="P" {{ $peh->status == 'P' ? 'selected' : '' }}>Terjadwal</option>
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group m-3">
                 <label for="id_user" class="col-sm-3 col-form-label">Host</label>
-                <div class="col-sm-9">
+                
                     <select name="id_user" class="form-control" id="id_user">
                         @foreach ($user as $item)
                             <option value="{{ $item->id }}" {{ $item->id == $peh->id_user ? 'selected' : '' }}>
@@ -96,13 +96,15 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
+                
             </div>
         </div>
         
         <div class="px-3">
-            <button class="btn btn-success">Simpan</button>
-            <a class="btn btn-warning" href="{{ url('/peh') }}">Kembali</a>
+            <div class="form-group m-3">
+                <button class="btn btn-success">Simpan</button>
+                <a class="btn btn-warning" href="{{ url('/peh') }}">Kembali</a>
+            </div>
         </div>
     </form>
 

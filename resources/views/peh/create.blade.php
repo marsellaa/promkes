@@ -35,43 +35,46 @@
         <div class="card-body">
         <form action="{{route('peh.store')}}" method="POST">
         @csrf
-        <div class="px-3">
             <div class="form-group m-3">
                 <label for="">Tanggal 
                     <input type="date" class="form-control " id="tgl"  name="tgl">
                 </label>
             </div>
-            <div class="form-group">
-                <label for="id_dokter" class="col-sm-3 col-form-label">Nama Narasumber</label>
-                <div class="col-sm-9">
+            <div class="form-group m-3">
+                <label for="id_dokter" >Nama Narasumber
                     <select name="id_dokter" class="form-control select2" id="id_dokter" onchange="updateFields()">
                         <option value="">Pilih Narasumber</option>
                         @foreach ($dokter as $item)
-                            <option value="{{ $item->id }}" 
-                                data-spesialisasi="{{ $item->spesialisasi }}" 
-                                data-subdivisi="{{ $item->subdivisi }}">
-                                {{ $item->nama }}
-                            </option>
+                        <option value="{{ $item->id }}" 
+                        data-spesialisasi="{{ $item->spesialisasi }}" 
+                        data-subdivisi="{{ $item->subdivisi }}">
+                        {{ $item->nama }}
+                        </option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="spesialisasi" class="col-sm-3 col-form-label">Spesialisasi</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="spesialisasi" readonly>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="subdivisi" class="col-sm-3 col-form-label">Unit Kerja</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="subdivisi" readonly>
-                </div>
+                
+                
+                </label>
+            
             </div>
             <div class="form-group m-3">
-                <label for="">Tema PEH
-                    <input type="text" class="form-control " id="tema" placeholder="Tema" name="tema">
+                <label for="spesialisasi" >Spesialisasi
+
+                    
+                    <input type="text" class="form-control" id="spesialisasi" readonly>
                 </label>
+                    
+            </div>
+            <div class="form-group m-3">
+                <label for="subdivisi">Unit Kerja
+                
+                    <input type="text" class="form-control" id="subdivisi" readonly>
+                </label>
+            </div>
+            <div class="form-group m-3">
+                <label for="">Tema PEH</label>
+                    <input type="text" class="form-control " id="tema" placeholder="Tema" name="tema">
+                
             </div>
             
             <div class="form-group m-3">
@@ -79,13 +82,12 @@
                     <select name="status" class="form-control">
                         <option value="Y">Y (Ya)</option>
                         <option value="T">T (Tidak)</option>
-                        <option value="P">P (Pending)</option>
+                        <option value="P">Terjadwal</option>
                     </select>
                 </label>
             </div>
-            <div class="form-group">
-                <label for="id_user" class="col-sm-3 col-form-label">Host</label>
-                <div class="col-sm-9">
+            <div class="form-group m-3">
+                <label for="id_user" >Tim Promkes
                     <select name="id_user" class="form-control select2">
                         @foreach ($user as $item)
                             <option value="{{ $item->id }}">
@@ -93,18 +95,18 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
+                </label>
             </div>
-        </div>
             <div class="form-group m-3">
                 <label for="">Viewers 
                     <input type="number" class="form-control " id="jml_penonton" placeholder="Jumlah Penonton" name="jml_penonton">
                 </label>
             </div>
-        </div>
-        <div class="px-3">
-            <button class="btn btn-success">Tambah</button>
-            <a class="btn btn-warning" href="{{url('/peh')}}">Kembali</a>
+        
+            <div class="px-3">
+                <button class="btn btn-success">Tambah</button>
+                <a class="btn btn-warning" href="{{url('/peh')}}">Kembali</a>
+            </div>
         </div>
     </form>
     <script>

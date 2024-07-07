@@ -40,7 +40,7 @@ class KerjaSamaNonBpjsController extends Controller
             'jenis_kerjasama' => 'required|string',
             'status' => 'required|in:Baru,Perpanjangan',
             'id_user' => 'required|exists:users,id',
-            'no_telp_pic' => 'required|numeric|digits_between:1,15',
+            'no_telp_pic' => 'required|numeric|digits_between:1,13',
             'dokumentasi' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -78,7 +78,7 @@ class KerjaSamaNonBpjsController extends Controller
             'jenis_kerjasama' => 'required|string',
             'status' => 'required|in:Baru,Perpanjangan',
             'id_user' => 'required|exists:users,id',
-            'no_telp_pic' => 'required|numeric|digits_between:1,15',
+            'no_telp_pic' => 'required|numeric|digits_between:1,13',
             'dokumentasi' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

@@ -6,7 +6,7 @@
         <a href="#" onclick="history.back();" class="btn btn-link text-primary align-middle pl-0 mb-2 mr-2">
             <i class="fas fa-lg fa-arrow-left"></i>
         </a>
-        <h1 class="h3 text-gray-800">{{ __('PEH') }}</h1>
+        <h1 class="h3 text-gray-800">{{ __('Akun') }}</h1>
     </div>
 
     @if (session('success'))

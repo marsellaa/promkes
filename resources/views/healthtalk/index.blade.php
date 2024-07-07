@@ -4,7 +4,9 @@
     <h1 class="h3 mb-2 text-gray-800">Health Talk</h1>
     <p class="mb-4">Tabel Data Health Talk</p>
     @if (Auth::user()->id_role === 1)
+    <div style="float: right">
         <a href="{{ route('healthtalk.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     @if (session('success'))
@@ -28,9 +30,9 @@
                     <th>Status</th>
                     <th>Mitra</th>
                     <th>Partisipan</th>
-                    <th>Host</th>
+                    <th>Tim Promkes</th>
                     @if(Auth::user()->id_role === 1)
-                        <th>Edit | Delete</th>
+                        <th>Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -56,11 +58,16 @@
                     <td>{{ $healthtalk->user->name }}</td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('healthtalk.edit', $healthtalk->id) }}" class="btn btn-warning">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('healthtalk.edit', $healthtalk->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('healthtalk.destroy', $healthtalk->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $healthtalk->tema_ht }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $healthtalk->tema_ht }}"><i class="fa fa-trash"></i>
+                                    </button>
+
                         </form>
                     </td>
                     @endif

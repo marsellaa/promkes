@@ -4,7 +4,9 @@
     <h1 class="h3 mb-2 text-gray-800">Flyer</h1>
     <p class="mb-4">Tabel Flyer</p>
     @if (Auth::user()->id_role === 1)
+    <div style="float: right">
         <a href="{{ route('flyer.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     @if (session('success'))
@@ -54,11 +56,16 @@
                     </td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('flyer.edit', $flyer->id) }}" class="btn btn-warning">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('flyer.edit', $flyer->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('flyer.destroy', $flyer->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $flyer->tema }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $flyer->tema }}"><i class="fa fa-trash"></i>
+                                    </button>
+
                         </form>
                     </td>
                     @endif

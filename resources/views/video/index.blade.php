@@ -4,9 +4,10 @@
     <h1 class="h3 mb-2 text-gray-800">Video</h1>
     <p class="mb-4">Tabel Video</p>
     @if (Auth::user()->id_role === 1)
-        <a href="{{ route('video.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+        <div style="float: right">
+            <a href="{{ route('video.create') }}" class="btn btn-primary mb-4">Tambah</a>
+        </div>
     @endif
-
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -36,33 +37,39 @@
             </thead>
             <tbody>
                 @foreach($videos as $video)
-                <tr>
-                    <td>{{ $video->id }}</td>
-                    <td>{{ $video->tgl }}</td>
-                    <td>{{ $video->jenis_info }}</td>
-                    <td>{{ $video->tema }}</td>
-                    <td>{{ $video->dokter->nama }}</td>
-                    <td>{{ $video->dokter->spesialisasi }}</td>
-                    <td>{{ $video->dokter->subdivisi }}</td>
-                    <td>{{ $video->user->name }}</td>
-                    <td>
-                        @if($video->dokumentasi)
-                            <a href="{{ Storage::url('videos/' . $video->dokumentasi) }}" target="_blank">Lihat</a>
-                        @else
-                            Tidak ada dokumentasi
+                    <tr>
+                        <td>{{ $video->id }}</td>
+                        <td>{{ $video->tgl }}</td>
+                        <td>{{ $video->jenis_info }}</td>
+                        <td>{{ $video->tema }}</td>
+                        <td>{{ $video->dokter->nama }}</td>
+                        <td>{{ $video->dokter->spesialisasi }}</td>
+                        <td>{{ $video->dokter->subdivisi }}</td>
+                        <td>{{ $video->user->name }}</td>
+                        <td>
+                            @if($video->dokumentasi)
+                                <a href="{{ Storage::url('videos/' . $video->dokumentasi) }}" target="_blank">Lihat</a>
+                            @else
+                                Tidak ada dokumentasi
+                            @endif
+                        </td>
+                        @if(Auth::user()->id_role === 1)
+                        <td>
+                            <div class="d-flex">
+                                <a href="{{ route('video.edit', $video->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $video->tema }}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                         @endif
-                    </td>
-                    @if(Auth::user()->id_role === 1)
-                    <td>
-                        <a href="{{ route('video.edit', $video->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $video->tema }}">Hapus</button>
-                        </form>
-                    </td>
-                    @endif
-                </tr>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

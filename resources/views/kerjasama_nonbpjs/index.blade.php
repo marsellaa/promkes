@@ -4,7 +4,9 @@
     <h1 class="h3 mb-2 text-gray-800">Kerja Sama Non BPJS</h1>
     <p class="mb-4">Tabel Kerja Sama Non BPJS</p>
     @if (Auth::user()->id_role === 1)
+    <div style="float: right">
         <a href="{{ route('kerjasama_nonbpjs.create') }}" class="btn btn-primary m-1 mb-2">Tambah</a>
+    </div>
     @endif
 
     @if (session('success'))
@@ -54,11 +56,16 @@
                     </td>
                     @if(Auth::user()->id_role === 1)
                     <td>
-                        <a href="{{ route('kerjasama_nonbpjs.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                    <div class="d-flex">
+                        <a href="{{ route('kerjasama_nonbpjs.edit', $item->id) }}" class="btn btn-warning edit-button">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                         <form action="{{ route('kerjasama_nonbpjs.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger show_confirm" data-nama="{{ $item->nama }}">Hapus</button>
+                            <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->nama }}"><i class="fa fa-trash"></i>
+                                    </button>
+
                         </form>
                     </td>
                     @endif

@@ -16,6 +16,7 @@ class PehController extends Controller
         $user = Auth::user();
         $dokter = Dokter::all();
         $peh = Peh::all();
+        $peh = Peh::orderBy('tgl', 'desc')->get();
 
         return view('peh.index', compact('peh'));
     }
@@ -40,7 +41,7 @@ class PehController extends Controller
             'tema' => 'required|string',
             'status' => 'required|in:Y,T,P',
             'id_user' => 'required|exists:users,id',
-            'jml_penonton' => 'required|integer',
+            'jml_penonton' => 'required|integer|min:0',
         ]);
 
         Peh::create($validatedData);
@@ -67,7 +68,7 @@ class PehController extends Controller
             'tema' => 'required|string',
             'status' => 'required|in:Y,T,P',
             'id_user' => 'required|exists:users,id',
-            'jml_penonton' => 'required|integer',
+            'jml_penonton' => 'required|integer|min:0',
         ]);
 
         $peh->update($validatedData);
