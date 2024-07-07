@@ -112,19 +112,18 @@
     @endif
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('cetakForm');
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('cetakForm');
 
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-                const startDate = document.querySelector('input[name="start_date"]').value;
-                const endDate = document.querySelector('input[name="end_date"]').value;
+        const startDate = document.querySelector('input[name="start_date"]').value;
+        const endDate = document.querySelector('input[name="end_date"]').value;
 
-                const pdfUrl = '{{ route('peh.downloadPdf') }}' + `?start_date=${startDate}&end_date=${endDate}`;
+        const pdfUrl = `{{ route('peh.downloadPdf') }}?start_date=${startDate}&end_date=${endDate}`;
 
-                window.location.href = pdfUrl;
-            });
-        });
+        window.location.href = pdfUrl;
+    });
+});
     </script>
-@endpush

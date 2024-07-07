@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/kerjasama_nonbpjs', 'KerjaSamaNonBpjsController@index')->name('kerjasama_nonbpjs.index');
     Route::get('/video', 'VideoController@index')->name('video.index');
     Route::get('/flyer', 'FlyerController@index')->name('flyer.index');
-    Route::get('/akun','AkunController@index')->name('akun.index');
+    
     
 
     Route::middleware('isAdmin')->group(function () {
@@ -148,11 +148,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/flyer/{flyer}', 'FlyerController@update')->name('flyer.update');
         Route::delete('/flyer/{flyer}', 'FlyerController@destroy')->name('flyer.destroy');
     
-        
+        Route::get('/akun','AkunController@index')->name('akun.index');
         Route::get('/akun/create','AkunController@create')->name('akun.create');
         Route::post('/akun/store','AkunController@store')->name('akun.store');
-        Route::get('/akun/edit/{$id}','AkunController@edit')->name('akun.edit');
-        Route::put('/akun/update/{$id}','AkunController@update')->name('akun.update');
-        Route::delete('/akun/destroy/{akun]','AkunController@destroy')->name('akun.destroy');
+        Route::get('/akun/edit/{akun}','AkunController@edit')->name('akun.edit');
+        Route::put('/akun/update/{akun}','AkunController@update')->name('akun.update');
+        Route::delete('/akun/destroy/{id}','AkunController@destroy')->name('akun.destroy');
     });
 });

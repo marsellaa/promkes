@@ -32,13 +32,15 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData= $request->validate([
-            'name'=> 'required|string',
-            'email'=>'required|string',
-            'id_role'=>'required|string',
-            'password'=>'required|string',
-            'phone_number'=>'required|integer'
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users,email',
+            'id_role' => 'required|integer',
+            'password' => 'required|string|min:8',
+            'phone_number' => 'nullable|numeric|digits_between:1,13'
         ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);
         return redirect()->route('akun.index')->with('success', 'Data berhasil disimpan.');
@@ -59,7 +61,7 @@ class AkunController extends Controller
     {
         $akun = User::find($id);
         return view('users.edit',[
-            'akun'=>$akun
+            'akun' => $akun
         ]);
     }
 
@@ -69,22 +71,22 @@ class AkunController extends Controller
     public function update(Request $request, string $id)
     {
         $akun = User::find($id);
-        $validatedData= $request->validate([
-            'name'=> 'required|string',
-            'email'=>'required|string',
-            'id_role'=>'required|string',
-            'password'=>'required|string',
-            'phone_number' => 'required|string'
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users,email,' . $akun->id,
+            'id_role' => 'required|integer',
+            'password' => 'nullable|string|min:8',
+            'phone_number' => 'nullable|numeric|digits_between:1,13' 
         ]);
 
-        $akun->name = $validatedData['name'];
-        $akun->email = $validatedData['email'];
-        $akun->id_role = $validatedData['id_role'];
-        $akun->password = Hash::make($validatedData['password']);
-        $akun->phone_number = $validatedData['phone_number'];
-        $akun->update($validatedData);
-        return redirect()->route('akun.index')->with('success', 'Akun Telah berhasil diubah');
+        // if (!empty($validatedData['password'])) {
+        //     $validatedData['password'] = Hash::make($validatedData['password']);
+        // } else {
+        //     $validatedData['password'] = $akun->password;
+        // }
 
+        $akun->update($validatedData);
+        return redirect()->route('akun.index')->with('success', 'Akun telah berhasil diubah.');
     }
 
     /**
@@ -97,6 +99,6 @@ class AkunController extends Controller
 
         $akun->delete();
 
-        return redirect()->route('nama_route_yang_diinginkan')->with('success', "Akun $nama berhasil dihapus.");
+        return redirect()->route('akun.index')->with('success', "Akun $nama berhasil dihapus.");
     }
 }
