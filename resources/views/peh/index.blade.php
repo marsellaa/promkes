@@ -106,7 +106,7 @@
                     form.submit();
                 });
             });
-
+                
             });
 
     </script>
@@ -120,6 +120,7 @@
             });
         </script>
     @endif
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -137,3 +138,4 @@
     });
 });
     </script>
+@endpush
