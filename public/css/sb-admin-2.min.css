@@ -44,6 +44,10 @@
         
 }
 
+.nonaktif {
+    background-color: #e4dbdbb4; /* Warna abu-abu */
+}
+
 .edit-button, .delete-button {
     padding: 10px 12px; /* Menyesuaikan padding agar tombol lebih simetris */
     margin: 2px; /* Memberikan sedikit jarak antar tombol */

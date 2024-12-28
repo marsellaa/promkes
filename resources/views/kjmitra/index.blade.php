@@ -54,11 +54,11 @@
                         <a href="{{ route('kjmitra.edit', $kjmitra->id) }}" class="btn btn-warning edit-button">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                        <form action="{{ route('kjmitra.destroy', $kjmitra->id) }}" method="POST" style="display:inline;">
+                        <!-- <form action="{{ route('kjmitra.destroy', $kjmitra->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $kjmitra->tujuan }}"><i class="fa fa-trash"></i>
-                                    </button>
+                                    </button> -->
 
                         </form>
                     </td>

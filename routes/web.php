@@ -4,6 +4,9 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\PehController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReportMail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/kerjasama_nonbpjs', 'KerjaSamaNonBpjsController@index')->name('kerjasama_nonbpjs.index');
     Route::get('/video', 'VideoController@index')->name('video.index');
     Route::get('/flyer', 'FlyerController@index')->name('flyer.index');
-    
+    Route::get('/dokter', 'DokterController@index')->name('dokter.index');
+    Route::get('/peh/download-pdf', 'PehController@downloadPdf')->name('peh.downloadPdf');
+        
     
 
     Route::middleware('isAdmin')->group(function () {
@@ -56,8 +61,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/peh/{peh}/edit', 'PehController@edit')->name('peh.edit');
         Route::put('/peh/{peh}', 'PehController@update')->name('peh.update');
         Route::delete('/peh/{id}', 'PehController@destroy')->name('peh.destroy');
-        Route::get('/peh/download-pdf', 'PehController@downloadPdf')->name('peh.downloadPdf');
-    
+        Route::get('/dokter-by-spesialisasi', 'PehController@getDokterBySpesialisasi')->name('dokter.by-spesialisasi');
+        
         // Halaman Mitra
         
         Route::get('/mitra/create', 'mitraController@create')->name('mitra.create');
@@ -154,5 +159,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/akun/edit/{akun}','AkunController@edit')->name('akun.edit');
         Route::put('/akun/update/{akun}','AkunController@update')->name('akun.update');
         Route::delete('/akun/destroy/{id}','AkunController@destroy')->name('akun.destroy');
+
+        Route::get('/dokter/create', 'DokterController@create')->name('dokter.create');
+        Route::post('/dokter', 'DokterController@store')->name('dokter.store');
+        Route::get('/dokter/{dokter}/edit', 'DokterController@edit')->name('dokter.edit');
+        Route::put('/dokter/{dokter}', 'DokterController@update')->name('dokter.update');
+        Route::delete('/dokter/{dokter}', 'DokterController@destroy')->name('dokter.destroy');
+
+        
     });
 });

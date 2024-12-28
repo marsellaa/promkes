@@ -60,6 +60,7 @@
                         @if(Auth::user()->id_role === 1)
                         <option value="1">Admin</option>
                         <option value="2">Tim Promkes</option>
+                        <option value="3">Pimpinan</option>
                         @endif
                         <!-- @if(Auth::user()->id_role === 4)
                         <option value="1">Admin</option>

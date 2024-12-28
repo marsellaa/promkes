@@ -55,13 +55,13 @@
                             <a href="{{ route('donordarah.edit', $item->id) }}" class="btn btn-warning edit-button">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                        <form action="{{ route('donordarah.destroy', $item->id) }}" method="POST" style="display:inline;">
+                        <!-- <form action="{{ route('donordarah.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->nama }}"><i class="fa fa-trash"></i>
                                     </button>
 
-                        </form>
+                        </form> -->
                         @endif
                     </td>
                     @endif

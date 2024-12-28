@@ -27,6 +27,7 @@ class FlyerController extends Controller
         $user = Auth::user();
         
         $dokters = Dokter::all();
+        $dokters = Dokter::where('status','Aktif')->get();
         $users = User::all();
         return view('flyer.create', compact('dokters', 'users'));
     }

@@ -59,13 +59,13 @@
                                 <a href="{{ route('video.edit', $video->id) }}" class="btn btn-warning edit-button">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline;">
+                                <!-- <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $video->tema }}">
                                         <i class="fa fa-trash"></i>
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </td>
                         @endif

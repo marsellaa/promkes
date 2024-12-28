@@ -32,16 +32,13 @@
         @csrf
         <div class="form-group">
             <label for="tgl">Tanggal
-
                 <input type="date" class="form-control" id="tgl" name="tgl" required>
             </label>
         </div>
 
         <div class="form-group">
-            <label for="jenis_info">Jenis Informasi
-                </label>
-
-                <input type="text" class="form-control" id="jenis_info" name="jenis_info" required>
+            <label for="jenis_info">Jenis Informasi</label>
+            <input type="text" class="form-control" id="jenis_info" name="jenis_info" required>
         </div>
 
         <div class="form-group">
@@ -50,72 +47,56 @@
         </div>
 
         <div class="form-group">
-            <label for="id_dokter">Narasumber</label>
-
-                <select class="form-control select2" id="id_dokter" name="id_dokter" onchange="updateFields()" required>
-                    <option value="" disabled selected>Pilih Narasumber</option>
-                    @foreach ($dokters as $dokter)
-                    <option value="{{ $dokter->id }}" data-spesialisasi="{{ $dokter->spesialisasi }}" data-subdivisi="{{ $dokter->subdivisi }}">{{ $dokter->nama }}</option>
-                    @endforeach
-                </select>
-        </div>
-        <!-- <div class="form-group m-3">
-                <label for="id_dokter" >Nama Narasumber
-                    </label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="id_dokter">Nama Narasumber</label>
                     <select name="id_dokter" class="form-control select2" id="id_dokter" onchange="updateFields()">
                         <option value="">Pilih Narasumber</option>
                         @foreach ($dokters as $dokter)
                         <option value="{{ $dokter->id }}" 
                         data-spesialisasi="{{ $dokter->spesialisasi }}" 
-                        data-subdivisi="{{ $dokter->subdivisi }}">
+                        data-subdivisi="{{ $dokter->subdivisi }}"
+                        data-nipnib="{{ $dokter->nipnib }}">
                         {{ $dokter->nama }}
                         </option>
                         @endforeach
                     </select>
-                 -->
+                </div>
+                <div class="col-md-6">
+                    <label for="nipnib">NIP/NIB</label>
+                    <input type="text" class="form-control" id="nipnib" readonly>
+                </div>
+            </div>
+        </div>
             
 
-        <div class="form-group">
-            <label for="spesialisasi">Spesialisasi
 
-                <input type="text" class="form-control" id="spesialisasi" readonly>
-            </label>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="spesialisasi_dokter">Spesialisasi</label>
+                    <input type="text" class="form-control" id="spesialisasi_dokter" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="subdivisi">Unit Kerja</label>
+                    <input type="text" class="form-control" id="subdivisi" readonly>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="subdivisi">Unit Kerja
-
-                <input type="text" class="form-control" id="subdivisi" readonly>
-            </label>
+            <label for="id_user">Tim Promkes</label>
+            <select class="form-control select2" id="id_user" name="id_user" required>
+                <option value="" disabled selected>Pilih Tim Promkes</option>
+                @foreach ($users as $user)
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="id_user">Tim Promkes
-                </label>
-                <select class="form-control select2" id="id_user" name="id_user" required>
-                    <option value="" disabled selected>Pilih Tim Promkes</option>
-                    @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-        </div>
-        <!-- <div class="form-group m-3">
-                <label for="id_user" >Tim Promkes
-                    <select name="id_user" class="form-control select2">
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">
-                                {{ $user->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </label>
-            </div> -->
-
-        <div class="form-group">
-            <label for="dokumentasi">Dokumentasi
-
-                <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi">
-            </label>
+            <label for="dokumentasi">Dokumentasi</label>
+            <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi">
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -125,19 +106,12 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-
         function updateFields() {
             var select = document.getElementById('id_dokter');
             var selectedOption = select.options[select.selectedIndex];
-
-            var spesialisasi = selectedOption.getAttribute('data-spesialisasi');
-            var subdivisi = selectedOption.getAttribute('data-subdivisi');
-
-            document.getElementById('spesialisasi').value = spesialisasi;
-            document.getElementById('subdivisi').value = subdivisi;
+            document.getElementById('nipnib').value = selectedOption.getAttribute('data-nipnib');
+            document.getElementById('spesialisasi_dokter').value = selectedOption.getAttribute('data-spesialisasi');
+            document.getElementById('subdivisi').value = selectedOption.getAttribute('data-subdivisi');
         }
     </script>
 @endpush

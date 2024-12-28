@@ -33,6 +33,7 @@ class HealthTalkController extends Controller
 
         
         $dokters = Dokter::all();
+        $dokters = Dokter::where('status','Aktif')->get();
         $users = User::all();
         $mitras = Mitra::all();
         $partisipans = Partisipan::all();
@@ -61,6 +62,7 @@ class HealthTalkController extends Controller
         if ($request->has('partisipan')) {
             $healthtalk->partisipans()->attach($request->partisipan);
         }
+        
         $healthtalk->mitras()->sync($request->mitras);
         $healthtalk->partisipans()->sync($request->partisipans);
 

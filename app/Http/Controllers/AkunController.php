@@ -13,7 +13,8 @@ class AkunController extends Controller
      */
     public function index()
     {
-        $akun = User::whereBetween('id_role',[1,2])->get();
+        $akun = User::whereBetween('id_role', [1, 3])->with('role')->get();
+    
         return view('users.index',[
             'akun'=>$akun
         ]);
@@ -40,9 +41,10 @@ class AkunController extends Controller
             'phone_number' => 'nullable|numeric|digits_between:1,13'
         ]);
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
+        // $validatedData['password'] =  bcrypt($validatedData['password']);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+        
         return redirect()->route('akun.index')->with('success', 'Data berhasil disimpan.');
     }
 

@@ -58,13 +58,13 @@
                         <a href="{{ route('feedback.edit', $feedback->id) }}" class="btn btn-warning edit-button">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                        <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" style="display:inline;">
+                        <!-- <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $feedback->nama_pasien }}"><i class="fa fa-trash"></i>
                                     </button>
 
-                        </form>
+                        </form> -->
                     </td>
                     @endif
                 </tr>

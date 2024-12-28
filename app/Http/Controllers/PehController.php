@@ -8,6 +8,9 @@ use App\Models\Dokter;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReportMail;
+use App\Models\HealthTalk;
 
 class PehController extends Controller
 {
@@ -21,14 +24,24 @@ class PehController extends Controller
         return view('peh.index', compact('peh'));
     }
 
-    public function create()
-    {
-        $user = Auth::user();
-        
-        $dokter = Dokter::all();
-        $user = User::all();
-        return view('peh.create', compact('dokter', 'user'));
+    public function create(Request $request)
+{
+    $user = Auth::user();
+    
+    // Ambil parameter filter dari query string
+    $spesialisasi = $request->query('spesialisasi', '');
+
+    // Filter dokter berdasarkan spesialisasi jika ada
+    if ($spesialisasi) {
+        $dokter = Dokter::where('spesialisasi', $spesialisasi)->get();
+    } else {
+        $dokter = Dokter::where('status','Aktif')->get();
     }
+
+    $user = User::all();
+    return view('peh.create', compact('dokter', 'user', 'spesialisasi'));
+}
+
 
 
 
@@ -93,5 +106,31 @@ class PehController extends Controller
         $peh = Peh::with(['dokter', 'user'])->whereBetween('tgl',[$start_date,$end_date])->get();
         $pdf = FacadePdf::loadView('peh.pdf', compact('peh','start_date','end_date'))->setPaper('a4', 'landscape');
         return $pdf-> download('peh-data.pdf');
+    }
+
+    public function sendReport(Request $request)
+    {
+    $request->validate([
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+        'email' => 'required|email'
+    ]);
+
+    // Fetch data
+    $peh = Peh::whereBetween('tgl', [$request->start_date, $request->end_date])
+        ->with(['dokter', 'user'])
+        ->get();
+
+    // Generate PDF
+    $pdf = FacadePdf::loadView('peh.report', [
+        'peh' => $peh,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date
+    ]);
+
+    // Send email with PDF attachment
+    Mail::to($request->email)->send(new ReportMail($pdf->output(), $request->start_date, $request->end_date));
+
+    return redirect()->route('peh.index')->with('success', 'Laporan berhasil dikirim.');
     }
 }

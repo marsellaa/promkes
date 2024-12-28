@@ -27,9 +27,6 @@
 
     <!-- Select2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
-
-
-
 </head>
 
 <body id="page-top">
@@ -134,6 +131,12 @@
             {{ __('Informasi') }}
         </div>
 
+        <li class="nav-item {{ Nav::isRoute('dokter.index') }}">
+            <a class="nav-link" href="{{ route('dokter.index') }}">
+                <i class="fas fa-fw fa-link"></i>
+                <span>{{ __('Dokter') }}</span>
+            </a>
+        </li>
         <li class="nav-item {{ Nav::isRoute('mitra.index') }}">
             <a class="nav-link" href="{{ route('mitra.index') }}">
                 <i class="fas fa-fw fa-link"></i>
@@ -307,18 +310,39 @@
 
 <!-- Scripts -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-<!-- SweetAlert -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <!-- SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
-<!-- Select2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@stack('scripts')
+    <!-- Custom Scripts -->
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Pilih Narasumber",
+                allowClear: true
+            });
 
+            $('#id_dokter').select2({
+                placeholder: "Pilih Narasumber",
+                allowClear: true
+            }).on('change', function() {
+            updateFields();
+        });
+    });
+
+    function updateFields() {
+        var select = document.getElementById('id_dokter');
+        var selectedOption = select.options[select.selectedIndex];
+        document.getElementById('nipnib').value = selectedOption.getAttribute('data-nipnib');
+        document.getElementById('spesialisasi_dokter').value = selectedOption.getAttribute('data-spesialisasi');
+        document.getElementById('subdivisi').value = selectedOption.getAttribute('data-subdivisi');
+    }
+</script>
 </body>
 </html>

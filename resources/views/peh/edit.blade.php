@@ -32,71 +32,80 @@
         @csrf
         @method("PUT")
         <div class="px-3">
-            <div class="form-group m-3">
-                <label for="tgl">Tanggal 
-                    <input type="date" class="form-control " id="tgl"  name="tgl" value="{{ $peh->tgl }}">
+            <div class="form-group">
+                <label for="tgl">Tanggal
+                <input type="date" class="form-control" id="tgl" name="tgl" value="{{ $peh->tgl }}">
                 </label>
             </div>
-
-            <div class="form-group m-3">
-                <label for="id_dokter" class="col-sm-3 col-form-label">Nama Narasumber</label>
-                    <select name="id_dokter" class="form-control" id="id_dokter" onchange="updateFields()">
-                        @foreach ($dokter as $item)
-                            <option value="{{ $item->id }}" 
-                                data-spesialisasi="{{ $item->spesialisasi }}" 
-                                data-subdivisi="{{ $item->subdivisi }}"
-                                {{ $item->id == $peh->id_dokter ? 'selected' : '' }}>
-                                {{ $item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                
+            
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="id_dokter">Nama Narasumber</label>
+                        <select name="id_dokter" class="form-control select2" id="id_dokter" onchange="updateFields()">
+                            @foreach ($dokter as $item)
+                                <option value="{{ $item->id }}" 
+                                    data-spesialisasi="{{ $item->spesialisasi }}" 
+                                    data-subdivisi="{{ $item->subdivisi }}"
+                                    data-nipnib="{{ $item->nipnib }}"
+                                    {{ $item->id == $peh->id_dokter ? 'selected' : '' }}>
+                                    {{ $item->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nipnib">NIP/NIB</label>
+                        <input type="text" class="form-control" id="nipnib" value="{{ $peh->dokter->nipnib }}" readonly>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group m-3">
-                <label for="spesialisasi" class="col-sm-3 col-form-label">Spesialisasi</label>
-                
-                    <input type="text" class="form-control" id="spesialisasi" name="spesialisasi" value="{{ $peh->dokter->spesialisasi }}" readonly>
-                
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="spesialisasi">Spesialisasi</label>
+                        <input type="text" class="form-control" id="spesialisasi" name="spesialisasi" value="{{ $peh->dokter->spesialisasi }}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="subdivisi">Unit Kerja</label>
+                        <input type="text" class="form-control" id="subdivisi" name="subdivisi" value="{{ $peh->dokter->subdivisi }}" readonly>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group m-3">
-                <label for="subdivisi" class="col-sm-3 col-form-label">Unit Kerja</label>
-                
-                    <input type="text" class="form-control" id="subdivisi" name="subdivisi" value="{{ $peh->dokter->subdivisi }}" readonly>
-                
-            </div>
 
-            <div class="form-group m-3">
-                <label for="jml_penonton">Viewers</label>
-                <input type="number" class="form-control" id="jml_penonton" placeholder="Jumlah Penonton" name="jml_penonton" value="{{ $peh->jml_penonton }}">
-            </div>
-
-            <div class="form-group m-3">
+            <div class="form-group">
                 <label for="tema">Tema PEH</label>
                 <input type="text" class="form-control" id="tema" placeholder="Tema" name="tema" value="{{ $peh->tema }}">
             </div>
 
-            <div class="form-group m-3">
-                <label for="status">Status</label>
+            <div class="form-group">
+                <label for="status">Status
                 <select name="status" class="form-control" id="status">
                     <option value="Y" {{ $peh->status == 'Y' ? 'selected' : '' }}>Y (Ya)</option>
                     <option value="T" {{ $peh->status == 'T' ? 'selected' : '' }}>T (Tidak)</option>
                     <option value="P" {{ $peh->status == 'P' ? 'selected' : '' }}>Terjadwal</option>
                 </select>
+                </label>
             </div>
 
-            <div class="form-group m-3">
-                <label for="id_user" class="col-sm-3 col-form-label">Host</label>
-                
-                    <select name="id_user" class="form-control" id="id_user">
-                        @foreach ($user as $item)
-                            <option value="{{ $item->id }}" {{ $item->id == $peh->id_user ? 'selected' : '' }}>
-                                {{ $item->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                
+            <div class="form-group">
+                <label for="id_user">Tim Promkes
+                <select name="id_user" class="form-control select2" id="id_user">
+                    @foreach ($user as $item)
+                        <option value="{{ $item->id }}" {{ $item->id == $peh->id_user ? 'selected' : '' }}>
+                            {{ $item->name }}
+                        </option>
+                    @endforeach
+                </select>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="jml_penonton">Viewers
+                <input type="number" class="form-control" id="jml_penonton" placeholder="Jumlah Penonton" name="jml_penonton" value="{{ $peh->jml_penonton }}">
+                </label>
             </div>
         </div>
         
@@ -115,12 +124,16 @@
 
             var spesialisasi = selectedOption.getAttribute('data-spesialisasi');
             var subdivisi = selectedOption.getAttribute('data-subdivisi');
+            var nipnib = selectedOption.getAttribute('data-nipnib');
 
             document.getElementById('spesialisasi').value = spesialisasi;
             document.getElementById('subdivisi').value = subdivisi;
+            document.getElementById('nipnib').value = nipnib;
         }
 
         // Initial call to populate fields when the page is loaded
-        updateFields();
+        document.addEventListener('DOMContentLoaded', function() {
+            updateFields();
+        });
     </script>
 @endsection

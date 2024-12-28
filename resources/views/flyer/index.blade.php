@@ -60,13 +60,13 @@
                         <a href="{{ route('flyer.edit', $flyer->id) }}" class="btn btn-warning edit-button">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                        <form action="{{ route('flyer.destroy', $flyer->id) }}" method="POST" style="display:inline;">
+                        <!-- <form action="{{ route('flyer.destroy', $flyer->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $flyer->tema }}"><i class="fa fa-trash"></i>
                                     </button>
 
-                        </form>
+                        </form> -->
                     </td>
                     @endif
                 </tr>

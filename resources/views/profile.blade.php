@@ -39,6 +39,8 @@
                                 <h5 class="font-weight-bold">{{  Auth::user()->fullName }}</h5>
                                 @if (Auth::user()->id_role == 1)
                                         Admin
+                                @elseif (Auth::user()->id_role == 3)
+                                        Pimpinan
                                     @else
                                         Tim Promkes
                                     @endif

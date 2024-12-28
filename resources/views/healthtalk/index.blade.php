@@ -62,13 +62,13 @@
                         <a href="{{ route('healthtalk.edit', $healthtalk->id) }}" class="btn btn-warning edit-button">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                        <form action="{{ route('healthtalk.destroy', $healthtalk->id) }}" method="POST" style="display:inline;">
+                        <!-- <form action="{{ route('healthtalk.destroy', $healthtalk->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $healthtalk->tema_ht }}"><i class="fa fa-trash"></i>
                                     </button>
 
-                        </form>
+                        </form> -->
                     </td>
                     @endif
                 </tr>

@@ -18,6 +18,7 @@ class Dokter extends Model
         'nama',
         'nipnib',
         'subdivisi',
-        'spesialisasi'
+        'spesialisasi',
+        'status',
     ];
 }

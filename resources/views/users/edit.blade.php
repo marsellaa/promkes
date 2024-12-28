@@ -61,6 +61,7 @@
                         @if(Auth::user()->id_role === 1)
                         <option value="1" {{ $akun->id_role == 1 ? 'selected' : '' }}>Admin</option>
                         <option value="2" {{ $akun->id_role == 2 ? 'selected' : '' }}>Tim Promkes</option>
+                        <option value="2" {{ $akun->id_role == 3 ? 'selected' : '' }}>Pimpinan</option>
                         @endif
                         <!-- @if(Auth::user()->id_role === 4)
                         <option value="1" {{ $akun->id_role == 1 ? 'selected' : '' }}>Admin</option>

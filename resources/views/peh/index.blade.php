@@ -7,7 +7,7 @@
             <h1 class="h3 text-gray-800">PEH EDUKASI HOESIN'ERS</h1>
             <p class="mb-4">Tabel Kegiatan PEH</p>
         </div>
-        @if (Auth::user()->id_role === 1)
+        @if (Auth::user()->id_role === 1 || Auth::user()->id_role === 3)
             <div class="d-flex">
                 <form id="cetakForm">
                     <input type="date" name="start_date"
