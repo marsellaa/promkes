@@ -36,12 +36,14 @@
             <thead>
                 <tr>
                     <th>Tanggal</th>
+                    <th>Jam</th> <!-- Kolom Jam -->
                     <th>Nama Narasumber</th>
+                    <th>Narasumber Pengganti</th> <!-- Kolom baru -->
                     <th>Spesialisasi</th>
-                    <th>Unit Kerja</th>
                     <th>Tema</th>
                     <th>Status</th>
-                    <th>Host</th>
+                    <th>Tim Promkes</th>
+                    <th>Host Luar</th> <!-- Kolom baru -->
                     @if(Auth::user()->id_role === 1)
                         <th>Aksi</th>
                     @endif
@@ -51,12 +53,14 @@
                 @foreach($peh as $item)
                 <tr>
                     <td>{{ $item->tgl }}</td>
+                    <td>{{ $item->jam ?? 'Tidak Diketahui' }}</td> <!-- Menampilkan Jam -->
                     <td>{{ $item->dokter->nama }}</td>
+                    <td>{{ $item->dokterPengganti->nama ?? 'Tidak Ada' }}</td> <!-- Menampilkan narasumber pengganti -->
                     <td>{{ $item->dokter->spesialisasi }}</td>
-                    <td>{{ $item->dokter->subdivisi }}</td>
                     <td>{{ $item->tema }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->user->name }}</td>
+                    <td>{{ $item->host ?? 'Tidak Ada' }}</td> <!-- Menampilkan host -->
                     @if(Auth::user()->id_role === 1)
                     <td>
                         @if (Auth::user()->id === $item->id_user || Auth::user()->id_role === 1)
@@ -65,18 +69,8 @@
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </div>
-                            <div class="d-inline-block">
-                                <form action="{{ route('peh.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger delete-button show_confirm" data-nama="{{ $item->tema }}">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
                         @endif
                     </td>
-
                     @endif
                 </tr>
                 @endforeach
@@ -107,7 +101,7 @@
                 });
             });
                 
-            });
+        });
 
     </script>
     @if(session('success'))

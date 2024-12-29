@@ -30,6 +30,8 @@ class PehController extends Controller
     
     // Ambil parameter filter dari query string
     $spesialisasi = $request->query('spesialisasi', '');
+    //$spesialisasi_pengganti = $request->query('spesialisasi_pengganti', '');  // Ambil spesialisasi pengganti
+
 
     // Filter dokter berdasarkan spesialisasi jika ada
     if ($spesialisasi) {
@@ -37,6 +39,12 @@ class PehController extends Controller
     } else {
         $dokter = Dokter::where('status','Aktif')->get();
     }
+
+    // if ($spesialisasi_pengganti) {
+    //     $dokter_pengganti = Dokter::where('spesialisasi', $spesialisasi_pengganti)->get();
+    // } else {
+    //     $dokter_pengganti = Dokter::all();  // Menampilkan semua dokter jika spesialisasi_pengganti kosong
+    // }
 
     $user = User::all();
     return view('peh.create', compact('dokter', 'user', 'spesialisasi'));
@@ -55,6 +63,9 @@ class PehController extends Controller
             'status' => 'required|in:Y,T,P',
             'id_user' => 'required|exists:users,id',
             'jml_penonton' => 'required|integer|min:0',
+            'jam' => 'nullable|string',  // Validasi kolom jam
+            'narasumber_pengganti' => 'nullable|exists:tb_dokter,id',  // Validasi kolom narasumber pengganti
+            'host' => 'nullable|string', 
         ]);
 
         Peh::create($validatedData);
@@ -82,6 +93,9 @@ class PehController extends Controller
             'status' => 'required|in:Y,T,P',
             'id_user' => 'required|exists:users,id',
             'jml_penonton' => 'required|integer|min:0',
+            'jam' => 'nullable|string',  // Validasi kolom jam
+            'narasumber_pengganti' => 'nullable|exists:tb_dokter,id',  // Validasi kolom narasumber pengganti
+            'host' => 'nullable|string', 
         ]);
 
         $peh->update($validatedData);

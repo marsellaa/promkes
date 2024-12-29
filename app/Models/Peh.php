@@ -20,7 +20,10 @@ class Peh extends Model
         'tema',
         'status',
         'id_user',
-        'jml_penonton'
+        'jml_penonton',
+        'jam',  // Tambahkan kolom jam
+        'narasumber_pengganti',  
+        'host'
     ];
 
     public function dokter()
@@ -31,5 +34,9 @@ class Peh extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+    public function dokterPengganti()
+    {
+        return $this->belongsTo(Dokter::class, 'narasumber_pengganti');
     }
 }
