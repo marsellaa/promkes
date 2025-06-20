@@ -26,7 +26,7 @@
                     <th>Tanggal</th>
                     <th>Mitra</th>
                     <th>Tujuan</th>
-                    <th>Host</th>
+                    <th>Tim Promkes</th>
                     <th>Dokumentasi</th>
                     @if(Auth::user()->id_role === 1)
                         <th>Aksi</th>

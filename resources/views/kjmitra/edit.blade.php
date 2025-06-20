@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            <label for="id_user">Host</label>
+            <label for="id_user">Tim Promkes</label>
             <select class="form-control select2" id="id_user" name="id_user" required>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}" {{ $kjmitra->id_user == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>

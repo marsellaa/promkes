@@ -66,9 +66,9 @@
         </div>
 
         <div class="form-group">
-            <label for="mitra">Mitra</label>
-            <select class="form-control select2" id="mitra" name="id_mitra" data-placeholder="Pilih Mitra" required>
-                <option value="" disabled>Pilih Mitra</option>
+            <label for="mitra">Penyelenggara</label>
+            <select class="form-control select2" id="mitra" name="id_mitra" data-placeholder="Pilih Penyelenggara" required>
+                <option value="" disabled>Pilih Penyelenggara</option>
                 @foreach ($mitras as $mitra)
                     <option value="{{ $mitra->id }}" {{ old('id_mitra', $donordarah->id_mitra) == $mitra->id ? 'selected' : '' }}>{{ $mitra->nama }}</option>
                 @endforeach

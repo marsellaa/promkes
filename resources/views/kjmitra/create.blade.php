@@ -51,9 +51,9 @@
         </div>
 
         <div class="form-group">
-            <label for="id_user">Host</label>
+            <label for="id_user">Tim Promkes</label>
             <select class="form-control select2" id="id_user" name="id_user" required>
-                <option value="" disabled selected>Pilih Host</option>
+                <option value="" disabled selected>Pilih</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach

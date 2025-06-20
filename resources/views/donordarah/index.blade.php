@@ -20,7 +20,7 @@
                     <th>Jumlah Partisipan</th>
                     <th>Jumlah Donor</th>
                     <th>Tim Promkes</th>
-                    <th>Mitra</th>
+                    <th>Penyelenggara</th>
                     <th>Partisipan</th>
                     <th>Dokumentasi</th>
                     @if(Auth::user()->id_role === 1)

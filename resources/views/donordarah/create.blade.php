@@ -38,9 +38,9 @@
         <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" id="status" name="status" required>
-                <option value="Y">Ya</option>
-                <option value="T">Tidak</option>
-                <option value="P">Pending</option>
+                <option value="Y">Terlaksana</option>
+                <option value="T">Batal</option>
+                <option value="P">Terjadwal</option>
             </select>
         </div>
 
@@ -65,9 +65,9 @@
         </div>
 
         <div class="form-group">
-            <label for="mitra">Mitra</label>
-            <select class="form-control select2" id="mitra" name="id_mitra" data-placeholder="Pilih Mitra" required>
-                <option value="" disabled selected>Pilih Mitra</option>
+            <label for="mitra">Penyelenggara</label>
+            <select class="form-control select2" id="mitra" name="id_mitra" data-placeholder="Pilih Penyelenggara" required>
+                <option value="" disabled selected>Pilih Penyelenggara</option>
                 @foreach ($mitras as $mitra)
                     <option value="{{ $mitra->id }}">{{ $mitra->nama }}</option>
                 @endforeach
